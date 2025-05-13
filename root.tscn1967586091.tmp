@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvcklyq426y8e"]
+
+[ext_resource type="Script" uid="uid://b7ty4fpqcysct" path="res://generic_6dof_joint_3d.gd" id="1_pq8q7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pq8q7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pyidc"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vvh5c"]
+
+[node name="Root" type="Node3D"]
+
+[node name="Elo1" type="RigidBody3D" parent="."]
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Elo1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Elo2")
+script = ExtResource("1_pq8q7")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Elo1"]
+mesh = SubResource("CylinderMesh_pq8q7")
+
+[node name="Elo2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Elo2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Elo3")
+script = ExtResource("1_pq8q7")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Elo2"]
+mesh = SubResource("CylinderMesh_pyidc")
+
+[node name="Elo3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Elo3"]
+mesh = SubResource("CylinderMesh_vvh5c")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8)

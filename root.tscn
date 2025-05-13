@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvcklyq426y8e"]
+
+[ext_resource type="Script" uid="uid://b7ty4fpqcysct" path="res://generic_6dof_joint_3d.gd" id="1_pq8q7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pq8q7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pyidc"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vvh5c"]
+
+[node name="Root" type="Node3D"]
+
+[node name="Base" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Base"]
+node_a = NodePath("..")
+node_b = NodePath("../../Elo1")
+angular_limit_z/upper_angle = 3.14159
+angular_limit_z/lower_angle = -3.14159
+angular_limit_z/force_limit = 9999.0
+angular_motor_z/enabled = true
+angular_motor_z/target_velocity = 0.174533
+angular_motor_z/force_limit = 1e+13
+script = ExtResource("1_pq8q7")
+
+[node name="Elo1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 0
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Elo1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Elo2")
+angular_limit_z/upper_angle = 3.14159
+angular_limit_z/lower_angle = -3.14159
+angular_motor_z/enabled = true
+angular_motor_z/target_velocity = 0.174533
+angular_motor_z/force_limit = 9999.0
+script = ExtResource("1_pq8q7")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Elo1"]
+mesh = SubResource("CylinderMesh_pq8q7")
+
+[node name="Elo2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+collision_mask = 0
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Elo2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+node_a = NodePath("..")
+node_b = NodePath("../../Elo3")
+angular_limit_z/upper_angle = 3.14159
+angular_limit_z/lower_angle = -3.14159
+angular_motor_z/enabled = true
+angular_motor_z/target_velocity = 0.174533
+angular_motor_z/force_limit = 9999.0
+script = ExtResource("1_pq8q7")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Elo2"]
+mesh = SubResource("CylinderMesh_pyidc")
+
+[node name="Elo3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+collision_mask = 0
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Elo3"]
+mesh = SubResource("CylinderMesh_vvh5c")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 3)
